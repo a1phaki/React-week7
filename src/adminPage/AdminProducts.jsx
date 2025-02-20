@@ -206,9 +206,6 @@ export default function AdminProducts() {
   }
 
 
-
-
-
   const getAdminProducts = async (page=1) => {
     setIsLoading(true);
     try {

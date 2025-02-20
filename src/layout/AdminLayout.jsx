@@ -3,9 +3,12 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ReactLoading from "react-loading";
 import Toast from "../components/Toast";
+import { useDispatch } from "react-redux";
+import { pushMessage } from "../redux/toastSlice";
+
+
 
 const api_base = import.meta.env.VITE_BASE_URL;
-const api_url = import.meta.env.VITE_API_PATH;
 
 export default function AdminLayout() {
   const [isAuth, setIsAuth] = useState(null);
@@ -22,6 +25,32 @@ export default function AdminLayout() {
       navigate("/login");
     }
   };
+
+  const dispatch = useDispatch();
+
+
+
+  const logout = async ()=>{
+    try {
+      const res = await axios.post(`${api_base}/logout`);
+      
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    
+      delete axios.defaults.headers.common.Authorization;
+
+      dispatch(pushMessage({
+                text:'登出成功',
+                status:'success'
+              }));
+      navigate('/login')
+    } catch (error) {
+      console.log(error)
+      dispatch(pushMessage({
+        text:'登出失敗',
+        status:'failed'
+      }));
+    }
+  }
 
   useEffect(() => {
     const token = document.cookie.replace(
@@ -56,6 +85,9 @@ export default function AdminLayout() {
                 </Link>
               </li>
             </ul>
+            <button className="btn btn-warning" onClick={logout}>
+              登出
+            </button>
           </div>
         </div>
       </nav>

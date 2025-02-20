@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 
 
 function ProductModal ({modalType, closeModal, selectedProduct, handleFileChange, handleModalInputChange, handleAddImage, handleRemoveImage, deleteProduct, updateProduct,handleImageChange,productModalRef}) {
-
-
     return(
         <div className="modal fade" id="productModal" tabIndex="-1" aria-labelledby="productModalLabel" ref={productModalRef} aria-hidden="true">
             <div className="modal-dialog modal-xl">
