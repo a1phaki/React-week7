@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ReactLoading from "react-loading";
+import Toast from "../components/Toast";
 
 const api_base = import.meta.env.VITE_BASE_URL;
+const api_url = import.meta.env.VITE_API_PATH;
 
 export default function AdminLayout() {
   const [isAuth, setIsAuth] = useState(null);
@@ -30,6 +32,8 @@ export default function AdminLayout() {
 
     loginCheck();
   }, []);
+
+  
 
   return (
     <>
@@ -67,6 +71,7 @@ export default function AdminLayout() {
           />
         </div>
       )}
+      <Toast></Toast>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-
+import Toast from "../components/Toast";
 export default function UserLayout() {
   return (
     <>
